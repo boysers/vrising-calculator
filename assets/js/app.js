@@ -47,12 +47,31 @@
  * @property {string} entityType
  */
 
-const language = "fr";
+const countries = [
+  "de",
+  "en",
+  "es",
+  "fr",
+  "it",
+  "ja",
+  "ko",
+  "pl",
+  "pt-br",
+  "ru",
+  "th",
+  "tr",
+  "zh",
+  "zh-tw",
+];
+
 const recipeSlug = new URLSearchParams(window.location.search).get("recipe");
 
 const search = Number(
   new URLSearchParams(window.location.search).get("quantity") ?? 1
 );
+
+let language = new URLSearchParams(window.location.search).get("language");
+language = countries.includes(language) ? language : "en";
 
 if (recipeSlug) {
   let response = await fetch(
