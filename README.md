@@ -1,7 +1,11 @@
-# VRising Calculator
+# V Rising Calculator
 
-/?language=fr&recipe={recipe slug}&quantity={amount}
+## Recipe List
 
-example : [https://boysers.github.io/vrising-calculator/?language=fr&recipe=recipe_ingredient_radiumalloy&quantity=50](https://boysers.github.io/vrising-calculator/?language=fr&recipe=recipe_ingredient_radiumalloy&quantity=50)
+[https://boysers.github.io/v-rising-calculator](https://boysers.github.io/v-rising-calculator)
 
-recipe list : [https://boysers.github.io/vrising-calculator](https://boysers.github.io/vrising-calculator)
+### Example
+
+/?language={lang}&recipe={slug}&quantity={amount}
+
+[https://boysers.github.io/v-rising-calculator/?language=fr&recipe=recipe_ingredient_radiumalloy&quantity=50](https://boysers.github.io/v-rising-calculator/?language=fr&recipe=recipe_ingredient_radiumalloy&quantity=50)

@@ -10,6 +10,32 @@ body {
   
 }
 
+.controle {
+  max-width: 1024px;
+  margin: 16px auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+input {
+  padding: 12px;
+  border-radius: 4px;
+  background-color: transparent;
+  color: hsl(221, 39%, 95%);
+  border: 1px solid hsla(221, 19%, 40%);
+  transition: background-color ease-out 175ms, 
+              border-color ease-out 125ms;
+}
+
+input:hover {
+  border-color: hsla(221, 19%, 80%);
+}
+
+input:focus {
+  background-color: hsl(221, 29%, 80%, 0.07);
+}
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -17,6 +43,10 @@ body {
   margin: 16px auto;
   padding: 0 32px;
   max-width: 1024px;
+}
+
+.card-container > p {
+  grid-column: 1/4;
 }
 
 .card-container > a {
@@ -36,22 +66,60 @@ body {
 .card {
   background-color: hsl(221, 39%, 16%);
   display: grid;
-  grid-template-columns: 80px 1fr;
-  column-gap: 8px;
-  min-height: 80px;
-  padding: 0px 8px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  column-gap: 6px;
+  min-height: 96px;
+  overflow: hidden;
 }
 
-.card > img {
+.card > .card__image {
   grid-column: 1;
-  grid-row: 1/2;
-  margin: auto;
+  grid-row: 1/4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 6px;
+}
+
+.card > .card__image > div {
+  position: relative;
+}
+
+.card > .card__image > div::after {
+  content: attr(data-recipe-count);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 500;
+  text-shadow: -2px 2px 5px black;
+}
+
+.card > * {
+  margin: 0;
+}
+
+.card > *:not(img) {
+  grid-column: 2;
+}
+
+.card-container > h2 {
+  grid-column: 1/4;
 }
 
 .card > h3 {
-  font-size: 18px;  
-  margin: 0;
   display: flex;
-  align-items: center;
-  grid-column: 2;
+  align-items: end; 
+  font-size: 16px;
+}
+
+.card > h4 {
+  color: hsl(221, 20%, 60%);
+  font-size: 14px;
+}
+
+.card > p {
+  color: hsl(221, 20%, 60%);
+  font-size: 12px;
+  font-weight: 500;
 }
