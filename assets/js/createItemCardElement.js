@@ -3,7 +3,7 @@ export function createItemCardElement(item) {
 
   const linkEl = document.createElement("a");
 
-  const recipePath = `/?recipe=${item.recipes[0]}&quantity=1&language=fr`;
+  const recipePath = `?recipe=${item.recipes[0]}&quantity=1&language=fr`;
 
   linkEl.setAttribute("href", recipePath);
 
