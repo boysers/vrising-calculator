@@ -18,11 +18,13 @@ body {
 
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   width: 100%;
   background-color: hsl(221, 39%, 11%);
 
   z-index: 1000;
+
+  transform: translateX(-50%);
 }
 
 .controle > select{
