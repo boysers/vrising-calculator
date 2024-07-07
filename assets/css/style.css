@@ -12,13 +12,28 @@ body {
 
 .controle {
   max-width: 1024px;
-  margin: 16px auto;
-  padding: 0 32px;
+  padding: 16px 32px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: hsl(221, 39%, 11%);
+
+  z-index: 1000;
 }
 
-input {
+.controle > select{
+  grid-column: 12;
+}
+
+.controle > input{
+  grid-column: 1/5;
+}
+
+input, select {
   padding: 12px;
   border-radius: 4px;
   background-color: transparent;
@@ -26,6 +41,10 @@ input {
   border: 1px solid hsla(221, 19%, 40%);
   transition: background-color ease-out 175ms, 
               border-color ease-out 125ms;
+}
+
+option {
+  color: rgb(0, 0, 0)
 }
 
 input:hover {
@@ -41,6 +60,7 @@ input:focus {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin: 16px auto;
+  margin-top: 64px;
   padding: 0 32px;
   max-width: 1024px;
 }

@@ -25,7 +25,7 @@ language = [
   "zh-tw",
 ].includes(language)
   ? language
-  : "fr";
+  : "en";
 
 // setTimeout(() => {
 //   window.history.pushState({}, "toto", "?toto=1");

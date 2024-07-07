@@ -1,9 +1,9 @@
-export function createItemCardElement(item) {
+export function createItemCardElement(item, language = "en") {
   const recipeCount = item.recipes.length;
 
   const linkEl = document.createElement("a");
 
-  const recipePath = `?recipe=${item.recipes[0]}&quantity=1&language=fr`;
+  const recipePath = `?recipe=${item.recipes[0]}&quantity=1&language=${language}`;
 
   linkEl.setAttribute("href", recipePath);
 

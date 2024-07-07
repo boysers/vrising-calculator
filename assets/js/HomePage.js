@@ -5,6 +5,20 @@ export class HomePage {
   constructor() {}
 
   /**
+   * @param {Array<any>} options
+   */
+  createSelectElement(language) {
+    const selectEl = document.createElement("select");
+    const optionEls = language.map((lang) => {
+      const optionEl = document.createElement("option");
+      optionEl.textContent = lang;
+      return optionEl;
+    });
+    selectEl.append(...optionEls);
+    return selectEl;
+  }
+
+  /**
    * @param {string} language
    */
   async run(language = "en") {
@@ -13,7 +27,34 @@ export class HomePage {
     const controleEl = document.createElement("div");
     controleEl.classList.add("controle");
     const searchInputEl = document.createElement("input");
-    controleEl.append(searchInputEl);
+
+    const languageSelectEl = this.createSelectElement([
+      "de",
+      "en",
+      "es",
+      "fr",
+      "it",
+      "ja",
+      "ko",
+      "pl",
+      "pt-br",
+      "ru",
+      "th",
+      "tr",
+      "zh",
+      "zh-tw",
+    ]);
+
+    languageSelectEl.value = language;
+
+    controleEl.append(searchInputEl, languageSelectEl);
+
+    languageSelectEl.addEventListener("change", (e) => {
+      e.preventDefault();
+      if (e.target.value !== language) {
+        window.location.href = "?language=" + e.target.value;
+      }
+    });
 
     const vrisingDBService = new VRisingDBService(language);
     const items = await vrisingDBService.getItems();
@@ -25,7 +66,7 @@ export class HomePage {
       if (item.recipes.length < 1) return acc;
 
       const categoryName = item.subTitle || "";
-      const itemCardEl = createItemCardElement(item);
+      const itemCardEl = createItemCardElement(item, language);
 
       const categoryItem = acc.find(
         (category) => category.name === categoryName
