@@ -71,9 +71,12 @@ export class VRisingDBService {
           (recipe) =>
             recipe.name === item.name &&
             recipe.iconPath === item.iconPath &&
-            !recipe.slug.includes("trader")
+            !["_trader", "_fake_do_not_add_"].some((str) =>
+              recipe.slug.includes(str)
+            )
         )
-        .map((recipe) => recipe.slug),
+        .map((recipe) => recipe.slug)
+        .sort((a, b) => a.localeCompare(b)),
     }));
   }
 }

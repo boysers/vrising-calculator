@@ -98,7 +98,8 @@ export class HomePage {
 
     categoryItems.forEach(({ element, items }) => {
       // items.forEach(({ element, item }) => {
-      //   element.addEventListener("click", () => {
+      //   element.addEventListener("click", (e) => {
+      //     e.preventDefault();
       //     console.table([item.name].concat(item.recipes));
       //   });
       // });

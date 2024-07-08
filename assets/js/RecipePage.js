@@ -170,7 +170,9 @@ export class RecipePage {
 
     /** @type {Array<Recipe>} */
     const recipes = (await response.json()).filter(
-      (recipe) => !recipe.slug.includes("trader")
+      (recipe) =>
+        !recipe.slug.includes("trader") &&
+        !["recipe_ingredient_plank_woodgloom"].some((r) => r === recipe.slug)
     );
 
     const principalListEl = document.createElement("ul");
@@ -184,8 +186,10 @@ export class RecipePage {
     let quantity = search;
 
     let amountTitle = quantity;
-    while (amountTitle % recipe.outputs[0].amount !== 0) {
-      amountTitle++;
+    if (recipe.outputs[0].amount) {
+      while (amountTitle % recipe.outputs[0].amount !== 0) {
+        amountTitle++;
+      }
     }
     titleEl.append(
       document.createTextNode("x" + amountTitle + " " + recipe.name)
@@ -227,7 +231,9 @@ export class RecipePage {
       );
       iconEl.setAttribute("alt", `${item.name} icon`);
       titleEl.appendChild(
-        document.createTextNode(`x${item.amount} ${item.name}`)
+        document.createTextNode(
+          isNaN(item.amount) ? item.name : `x${item.amount} ${item.name}`
+        )
       );
 
       cardEl.append(iconEl, titleEl);
@@ -252,8 +258,10 @@ export class RecipePage {
      * @param {boolean} bonus
      */
     async function test(recipe, element, quantity) {
-      while (quantity % recipe.outputs[0].amount !== 0) {
-        quantity++;
+      if (recipe.outputs[0].amount) {
+        while (quantity % recipe.outputs[0].amount !== 0) {
+          quantity++;
+        }
       }
 
       for (const requirement of recipe.requirements) {
@@ -281,7 +289,11 @@ export class RecipePage {
           `https://gtcdn.info/vrising${item.iconPath.replace("{height}", 64)}`
         );
         iconEl.setAttribute("alt", `${item.name} icon`);
-        titleEl.appendChild(document.createTextNode(`x${amount} ${item.name}`));
+        titleEl.appendChild(
+          document.createTextNode(
+            isNaN(amount) ? item.name : `x${amount} ${item.name}`
+          )
+        );
 
         containerEl.style.lineHeight = "1.6";
         iconEl.style.height = "24px";
