@@ -73,7 +73,7 @@ export class RecipePage {
     inputEl.setAttribute("max", "9999");
     inputEl.value = search;
     const buttonEl = document.createElement("button");
-    buttonEl.textContent = "Calcul";
+    buttonEl.textContent = "Calculate!";
 
     const languageSelectEl = this.createSelectElement([
       "de",
@@ -105,19 +105,29 @@ export class RecipePage {
       }
     });
 
-    controlEl.append(inputEl, buttonEl);
+    const bunusLabelEl = document.createElement("label");
+    bunusLabelEl.classList.add("bonus");
+    const bonusInputEl = document.createElement("input");
+    bonusInputEl.setAttribute("type", "checkbox");
+    bonusInputEl.checked = new URLSearchParams(location.search).get("bonus");
+    bunusLabelEl.append(bonusInputEl, "-25%");
+
+    controlEl.append(inputEl, bunusLabelEl, buttonEl);
 
     buttonEl.addEventListener("click", (e) => {
       e.preventDefault();
 
-      console.log(inputEl.value, search);
-
-      if (isNaN(inputEl.value) || inputEl.value == search) {
+      if (isNaN(inputEl.value)) {
         return;
       }
 
       let query = new URLSearchParams(window.location.search);
       query.set("quantity", inputEl.value);
+      if (bonusInputEl.checked) {
+        query.set("bonus", 25);
+      } else {
+        query.delete("bonus");
+      }
       window.location.href = "?" + query.toString();
     });
 
@@ -178,6 +188,8 @@ export class RecipePage {
     );
 
     const ressource = {};
+
+    const bonus = new URLSearchParams(window.location.search).get("bonus");
 
     await test(recipe, principalListEl, quantity);
 
@@ -253,6 +265,10 @@ export class RecipePage {
         const searchRecipe = recipes.find(
           (recipe) => recipe.name === item.name
         );
+
+        if (bonus && requirement.amount > 3) {
+          requirement.amount = requirement.amount * 0.75;
+        }
 
         let amount = (quantity / recipe.outputs[0].amount) * requirement.amount;
 

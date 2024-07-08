@@ -97,11 +97,11 @@ export class HomePage {
     }, []);
 
     categoryItems.forEach(({ element, items }) => {
-      items.forEach(({ element, item }) => {
-        element.addEventListener("click", () => {
-          console.table([item.name].concat(item.recipes));
-        });
-      });
+      // items.forEach(({ element, item }) => {
+      //   element.addEventListener("click", () => {
+      //     console.table([item.name].concat(item.recipes));
+      //   });
+      // });
 
       itemListEl.append(element, ...items.map((item) => item.element));
     });
