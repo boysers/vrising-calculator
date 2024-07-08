@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 html {
   font-family: "Roboto", sans-serif;
@@ -7,7 +7,62 @@ html {
 body {
   color: hsl(221, 39%, 95%);
   background-color: hsl(221, 39%, 11%);
-  
+}
+
+a {
+  text-decoration: none;
+  color: hsl(221, 39%, 95%);
+  font-size: 18px;
+  font-weight: 600;
+  transition: 128ms ease-out color;
+}
+
+a:hover {
+  color: hsl(221, 39%, 50%);
+}
+
+#app > .card {
+  grid-template-columns: auto auto auto 1fr auto;
+  grid-template-rows: 1fr;
+  min-height: 0;
+  padding: 8px 16px;
+}
+
+#app > .card > h3 {
+  align-items: center;
+}
+
+#app > .card > .link-list {
+  grid-column: 4;
+  display: flex;
+  align-items: center;
+  margin: 0 128px;
+  gap: 16px;
+}
+
+#app > .card > .control {
+  grid-column: 3;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+#app > .card > .control > input {
+  width: 64px;
+}
+
+#app > .card > .control > button {
+  border-color: hsl(221, 80%, 70%);
+  cursor: pointer;
+  margin-left: 8px;
+  color: hsl(221, 80%, 70%);
+}
+
+#app > .card > .language-control {
+  grid-column: 5;
+  display: flex;
+  align-items: center;
 }
 
 .controle {
@@ -27,26 +82,27 @@ body {
   transform: translateX(-50%);
 }
 
-.controle > select{
+.controle > select {
   grid-column: 12;
 }
 
-.controle > input{
+.controle > input {
   grid-column: 1/5;
 }
 
-input, select {
+input,
+select,
+button {
   padding: 12px;
   border-radius: 4px;
   background-color: transparent;
   color: hsl(221, 39%, 95%);
   border: 1px solid hsla(221, 19%, 40%);
-  transition: background-color ease-out 175ms, 
-              border-color ease-out 125ms;
+  transition: background-color ease-out 175ms, border-color ease-out 125ms;
 }
 
 option {
-  color: rgb(0, 0, 0)
+  color: rgb(0, 0, 0);
 }
 
 input:hover {
@@ -131,7 +187,7 @@ input:focus {
 
 .card > h3 {
   display: flex;
-  align-items: end; 
+  align-items: end;
   font-size: 16px;
 }
 

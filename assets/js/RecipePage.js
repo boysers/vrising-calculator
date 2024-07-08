@@ -50,7 +50,87 @@
 export class RecipePage {
   constructor() {}
 
+  /**
+   * @param {Array<any>} options
+   */
+  createSelectElement(language) {
+    const selectEl = document.createElement("select");
+    const optionEls = language.map((lang) => {
+      const optionEl = document.createElement("option");
+      optionEl.textContent = lang;
+      return optionEl;
+    });
+    selectEl.append(...optionEls);
+    return selectEl;
+  }
+
   async run(recipeSlug, search, language = "en") {
+    const controlEl = document.createElement("div");
+    controlEl.classList.add("control");
+    const inputEl = document.createElement("input");
+    inputEl.setAttribute("type", "number");
+    inputEl.setAttribute("min", "1");
+    inputEl.setAttribute("max", "9999");
+    inputEl.value = search;
+    const buttonEl = document.createElement("button");
+    buttonEl.textContent = "Calcul";
+
+    const languageSelectEl = this.createSelectElement([
+      "de",
+      "en",
+      "es",
+      "fr",
+      "it",
+      "ja",
+      "ko",
+      "pl",
+      "pt-br",
+      "ru",
+      "th",
+      "tr",
+      "zh",
+      "zh-tw",
+    ]);
+    languageSelectEl.value = language;
+    const controlLanguage = document.createElement("div");
+    controlLanguage.classList.add("language-control");
+    controlLanguage.append(languageSelectEl);
+
+    languageSelectEl.addEventListener("change", (e) => {
+      e.preventDefault();
+      if (e.target.value !== language) {
+        let query = new URLSearchParams(window.location.search);
+        query.set("language", e.target.value);
+        window.location.href = "?" + query.toString();
+      }
+    });
+
+    controlEl.append(inputEl, buttonEl);
+
+    buttonEl.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      console.log(inputEl.value, search);
+
+      if (isNaN(inputEl.value) || inputEl.value == search) {
+        return;
+      }
+
+      let query = new URLSearchParams(window.location.search);
+      query.set("quantity", inputEl.value);
+      window.location.href = "?" + query.toString();
+    });
+
+    const linkListEl = document.createElement("div");
+    linkListEl.classList.add("link-list");
+    const returnBtnEl = document.createElement("a");
+    const queries = new URLSearchParams();
+    queries.append("language", language);
+    returnBtnEl.setAttribute("href", "?" + queries.toString());
+    returnBtnEl.textContent = "Recipes";
+
+    linkListEl.append(returnBtnEl);
+
     let response = await fetch(
       `https://scdn.gaming.tools/vrising/data/${language}/recipe/${recipeSlug}.json`
     );
@@ -70,7 +150,7 @@ export class RecipePage {
     iconEl.setAttribute("alt", `${recipe.name} icon`);
 
     cardEl.classList.add("card");
-    cardEl.append(iconEl, titleEl);
+    cardEl.append(iconEl, titleEl, controlEl, linkListEl, controlLanguage);
 
     document.querySelector("#app").appendChild(cardEl);
 
