@@ -183,8 +183,12 @@ export class RecipePage {
 
     let quantity = search;
 
-    titleEl.appendChild(
-      document.createTextNode("x" + quantity + " " + recipe.name)
+    let amountTitle = quantity;
+    while (amountTitle % recipe.outputs[0].amount !== 0) {
+      amountTitle++;
+    }
+    titleEl.append(
+      document.createTextNode("x" + amountTitle + " " + recipe.name)
     );
 
     const ressource = {};

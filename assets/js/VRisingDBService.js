@@ -69,7 +69,9 @@ export class VRisingDBService {
       recipes: recipesData
         .filter(
           (recipe) =>
-            recipe.name === item.name && recipe.iconPath === item.iconPath
+            recipe.name === item.name &&
+            recipe.iconPath === item.iconPath &&
+            !recipe.slug.includes("trader")
         )
         .map((recipe) => recipe.slug),
     }));
